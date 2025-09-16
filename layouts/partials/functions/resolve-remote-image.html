@@ -1,0 +1,40 @@
+{{/* Resolve image source from a URL using site.Params.hotlinkPrefixes.
+
+  Considering performance, this only checks `HasPrefix` instead of using complex matching logic,
+  and hotlink sources typically do not need regex logic.
+
+  Input (dict):
+  - url: string (image path or absolute URL)
+
+  Output (dict):
+  - hotlink: bool. Determine the type another output key
+  - img: string or Hugo Resource
+    - string (hotlink is true): URL used directly in <img src>
+    - Hugo resource (hotlink is false): use this for Resize/Fill, then .RelPermalink
+*/}}
+{{ $url := .url }}
+
+{{ $useDirectURL := false }}
+{{ with site.Params.hotlinkPrefixes }}
+  {{ range . }}
+    {{ if or (eq . "*") (strings.HasPrefix $url .) }}
+      {{ $useDirectURL = true }}
+      {{ break }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $result := dict }}
+{{ if $useDirectURL }}
+  {{ $result = dict "hotlink" true "img" $url }}
+{{ else }}
+  {{ $res := resources.GetRemote $url }}
+  {{ with $res }}
+    {{ $result = dict "hotlink" false "img" . }}
+  {{ else }}
+    {{/* fallback if GetRemote fail */}}
+    {{ $result = dict "hotlink" true "img" $url }}
+  {{ end }}
+{{ end }}
+
+{{ return $result }}

@@ -1,39 +1,46 @@
 {{/* Used by
   1. layouts/partials/related.html (related articles in single page)
 */}}
-{{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
 
-{{ $featured := "" }}
-{{ $featuredURL := "" }}
-{{ with .Params.featureimage }}
-  {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-    {{ $featured = resources.GetRemote . }}
-  {{ else }}
-    {{ $featured = resources.Get . }}
+{{ $imgSrc := "" }}
+{{ $size := "600x" }}
+{{ with .Page }}
+  {{/* frontmatter */}}
+  {{ with .Params.featureimage }}
+    {{ $imgType := partial "functions/get-image-type.html" . }}
+    {{ if eq $imgType "local" }}
+      {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "global-assets" "size" $size ) }}
+    {{ else }}
+      {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" $imgType "size" $size ) }}
+    {{ end }}
   {{ end }}
-{{ end }}
 
-{{ if not $featured }}
-  {{ $images := $.Resources.ByType "image" }}
-  {{ range slice "*feature*" "*cover*" "*thumbnail*" }}
-    {{ if not $featured }}{{ $featured = $images.GetMatch . }}{{ end }}
+  {{/* page resources */}}
+  {{ if not $imgSrc }}
+    {{ range slice "*feature*" "*cover*" "*thumbnail*" }}
+      {{ if not $imgSrc }}
+        {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "page-bundle" "size" $size ) }}
+      {{ end }}
+    {{ end }}
   {{ end }}
-  {{ if not $featured }}
-    {{ with site.Params.defaultFeaturedImage }}{{ $featured = resources.Get . }}{{ end }}
-  {{ end }}
-{{ end }}
 
-{{ with $featured }}
-  {{ $featuredURL = .RelPermalink }}
-  {{ if not (or $disableImageOptimization (eq .MediaType.SubType "svg")) }}
-    {{ $featuredURL = (.Resize "600x").RelPermalink }}
+  {{/* fallback to default */}}
+  {{ if not $imgSrc }}
+    {{ with site.Params.defaultFeaturedImage }}
+      {{ $imgType := partial "functions/get-image-type.html" . }}
+      {{ if eq $imgType "local" }}
+        {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "global-assets" "size" $size ) }}
+      {{ else }}
+        {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" $imgType "size" $size ) }}
+      {{ end }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
 
 <article
   class="relative min-h-full min-w-full overflow-hidden rounded border border-2 border-neutral-200 shadow-2xl dark:border-neutral-700">
-  {{ with $featuredURL }}
+  {{ with $imgSrc }}
     <figure class="not-prose flex-none relative overflow-hidden thumbnail--related">
       <img
         src="{{ . }}"
@@ -52,7 +59,11 @@
   <div class="px-6 py-4">
     <header>
       <a
-        {{ partial "article-link/_external-link.html" . | safeHTMLAttr }}
+        {{ with .Params.externalUrl }}
+          href="{{ . }}" target="_blank" rel="external"
+        {{ else }}
+          href="{{ .RelPermalink }}"
+        {{ end }}
         class="not-prose before:absolute before:inset-0 decoration-primary-500 dark:text-neutral text-xl font-bold text-neutral-800 hover:underline hover:underline-offset-2">
         <h2>
           {{ .Title | emojify }}

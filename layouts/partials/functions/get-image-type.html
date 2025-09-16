@@ -1,0 +1,30 @@
+{{/* Get the image source
+
+  The partial works along with get-image-src.html.
+  The local means "page-bundle" or "global-assets". The partial cannot distinguish this.
+
+  Input (string): Image path string (assets path, page bundle or URL)
+
+  Output (string): Image type ("hotlink" | "remote" | "local")
+*/}}
+{{ $url := . }}
+
+{{ $type := "" }}
+{{ with site.Params.hotlinkPrefixes }}
+  {{ range . }}
+    {{ if or (eq . "*") (strings.HasPrefix $url .) }}
+      {{ $type = "hotlink" }}
+      {{ break }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if not $type }}
+  {{ if or (strings.HasPrefix "http://" $url ) (strings.HasPrefix "https://" $url ) }}
+    {{ $type = "remote" }}
+  {{ else }}
+    {{ $type = "local" }}
+  {{ end }}
+{{ end }}
+
+{{ return $type }}

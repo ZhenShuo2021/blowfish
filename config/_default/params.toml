@@ -26,6 +26,7 @@ disableTextInHeader = false
 # defaultBackgroundImage = "IMAGE.jpg" # used as default for background images 
 # defaultFeaturedImage = "IMAGE.jpg" # used as default for featured images in all articles
 # defaultSocialImage = "/android-chrome-512x512.png" # used as default for social media sharing (Open Graph and Twitter)
+# hotlinkPrefixes = ["https://your_hotlink_1.com/", "https://your_hotlink_2.com/"] # used to hotlink external images by URL prefix. use "*" to hotlink all external images.
 
 # highlightCurrentMenuArea = true
 # smartTOC = true

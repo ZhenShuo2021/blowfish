@@ -26,6 +26,7 @@ disableTextInHeader = false
 defaultBackgroundImage = "/img/background.svg"
 defaultFeaturedImage = "/img/featured.svg"
 defaultSocialImage = "/img/blowfish_banner.png"
+# hotlinkPrefixes = ["https://your_hotlink_1.com/", "https://your_hotlink_2.com/"] # used to hotlink external images by URL prefix. use "*" to hotlink all external images.
 
 highlightCurrentMenuArea = true
 smartTOC = true

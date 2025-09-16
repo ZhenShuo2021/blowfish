@@ -1,0 +1,48 @@
+{{/* Get image src based on the image type and resource location
+
+  Input (dict):
+  - ctx (.Page): The current page
+  - imgPath (string): Image path string
+  - type (string): Image type ("hotlink" | "remote" | "page-bundle" | "global-assets")
+  - size (string): The image width of resizing (optional)
+
+  Output (string): Image src (link).
+  Returns RelPermalink for processed images. Returns the direct link for "hotlink"
+
+  Note: use warnf to debug this partial. For example:
+
+  {{ if eq $ctx.Title "Welcome to Blowfish" }}
+    {{ warnf "Title: $s, images: %s" $ctx.Title (debug.Dump $images) }}
+  {{ end }}
+*/}}
+
+{{ $disableImageOptimization := site.Params.disableImageOptimization | default false }}
+
+{{ $ctx := .ctx }}
+{{ $imgPath := .imgPath }}
+{{ $type := .type }}
+{{ $size := .size }}
+{{ $imgSrc := "" }}
+{{ $imgObj := "" }}
+
+{{ if eq $type "hotlink" }}
+  {{ $imgSrc = $imgPath }}
+{{ else if eq $type "remote" }}
+  {{ $imgSrc = resources.GetRemote $imgPath }}
+{{ else if eq $type "page-bundle" }}
+  {{ $images := $ctx.Resources.ByType "image" }}
+  {{ $imgObj = $images.GetMatch $imgPath }}
+{{ else if eq $type "global-assets" }}
+  {{ $imgObj = resources.Get $imgPath }}
+{{ else }}
+  {{ errorf "Invalid image type: %s" $type }}
+{{ end }}
+
+{{ if $imgObj }}
+  {{ $imgSrc = $imgObj.RelPermalink }}
+  {{ if and (not $disableImageOptimization) (ne $imgObj.MediaType.SubType "svg") }}
+    {{ $imgSrc = ($imgObj.Resize $size).RelPermalink }}
+  {{ end }}
+{{ end }}
+
+{{ return $imgSrc }}
