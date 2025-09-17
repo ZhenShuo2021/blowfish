@@ -1,64 +1,51 @@
-{{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
-
+{{ $backgroundSrc := "" }}
+{{ $size := (print (site.Params.backgroundImageWidth | default "1200") "x") }}
 {{ $images := .Resources.ByType "image" }}
-{{ $background := $images.GetMatch "*background*" }}
-{{ $backgroundURL := "" }}
+{{ $backgroundSrc = ($images.GetMatch "*background*").RelPermalink }}
 
-{{ if not $background }}
+{{ if not $backgroundSrc }}
   {{ with .Site.Params.defaultBackgroundImage }}
-    {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-      {{ $background = resources.GetRemote . }}
+    {{ $imgType := partial "functions/get-image-type.html" . }}
+    {{ if eq $imgType "local" }}
+      {{ $backgroundSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "global-assets" "size" $size ) }}
     {{ else }}
-      {{ $background = resources.Get . }}
+      {{ $backgroundSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" $imgType "size" $size ) }}
     {{ end }}
   {{ end }}
 {{ end }}
 
 {{ range slice "*cover*" "*thumbnail*" "*feature*" }}
-  {{ if not $background }}{{ $background = $images.GetMatch . }}{{ end }}
-{{ end }}
-
-{{ with $background }}
-  {{ $backgroundURL = .RelPermalink }}
-  {{ if not (or $disableImageOptimization (eq .MediaType.SubType "svg")) }}
-    {{ $size := (print ($.Site.Params.backgroundImageWidth | default "1200") "x") }}
-    {{ $backgroundURL = (.Resize $size).RelPermalink }}
+  {{ if not $backgroundSrc }}
+    {{ $backgroundSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "page-bundle" "size" $size ) }}
   {{ end }}
 {{ end }}
 
-{{ $featured := "" }}
-{{ $featuredURL := "" }}
-{{ if .Params.featureimage }}
-  {{ $url := .Params.featureimage }}
-  {{ if or (strings.HasPrefix $url "http:") (strings.HasPrefix $url "https:") }}
-    {{ $featured = resources.GetRemote $url }}
+{{ $featuredSrc := "" }}
+{{ with .Params.featureimage }}
+  {{ $imgType := partial "functions/get-image-type.html" . }}
+  {{ if eq $imgType "local" }}
+    {{ $featuredSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "global-assets" "size" $size ) }}
   {{ else }}
-    {{ $featured = resources.Get $url }}
+    {{ $featuredSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" $imgType "size" $size ) }}
   {{ end }}
 {{ end }}
 
-{{ if not $featured }}
-  {{ $images := $.Resources.ByType "image" }}
+{{ if not $featuredSrc }}
   {{ range slice "*feature*" "*cover*" "*thumbnail*" "*background*" }}
-    {{ if not $featured }}{{ $featured = $images.GetMatch . }}{{ end }}
-  {{ end }}
-{{ end }}
-
-{{ if not $featured }}
-  {{ with .Site.Params.defaultFeaturedImage }}
-    {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-      {{ $featured = resources.GetRemote . }}
-    {{ else }}
-      {{ $featured = resources.Get . }}
+    {{ if not $featuredSrc }}
+      {{ $featuredSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "page-bundle" "size" $size ) }}
     {{ end }}
   {{ end }}
 {{ end }}
 
-{{ with $featured }}
-  {{ $featuredURL = .RelPermalink }}
-  {{ if not (or $disableImageOptimization (eq .MediaType.SubType "svg")) }}
-    {{ $size := (print ($.Site.Params.backgroundImageWidth | default "1200") "x") }}
-    {{ $featuredURL = (.Resize $size).RelPermalink }}
+{{ if not $featuredSrc }}
+  {{ with site.Params.defaultFeaturedImage }}
+    {{ $imgType := partial "functions/get-image-type.html" . }}
+    {{ if eq $imgType "local" }}
+      {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "global-assets" "size" $size ) }}
+    {{ else }}
+      {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" $imgType "size" $size ) }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
@@ -69,7 +56,7 @@
   )
 }}
 
-{{ with $featuredURL }}
+{{ with $featuredSrc }}
   <div class="overflow-hidden rounded-md h-36 md:h-56 lg:h-72 nozoom">
     <img
       src="{{ . }}"
@@ -83,7 +70,7 @@
 
 
 <div class="single_hero_background nozoom fixed inset-x-0 top-0 h-[800px]">
-  {{ with $backgroundURL }}
+  {{ with $backgroundSrc }}
     <img
       id="background-image-main"
       src="{{ . }}"
@@ -108,5 +95,5 @@
     integrity="{{ $backgroundBlur.Data.Integrity }}"
     data-blur-id="background-blur"
     data-image-id="background-image-main"
-    {{ with $background }}data-image-url="{{ .RelPermalink }}"{{ end }}></script>
+    {{ with $backgroundSrc }}data-image-url="{{ . }}"{{ end }}></script>
 {{ end }}

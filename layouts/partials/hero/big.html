@@ -1,28 +1,29 @@
-{{ $disableImageOptimization := .Page.Site.Params.disableImageOptimization | default false }}
-
-{{ $featured := "" }}
-{{ if .Params.featureimage }}
-  {{ $url := .Params.featureimage }}
-  {{ if or (strings.HasPrefix $url "http:") (strings.HasPrefix $url "https:") }}
-    {{ $featured = resources.GetRemote $url }}
+{{ $imgSrc := "" }}
+{{ $size := (print (site.Params.backgroundImageWidth | default "1200") "x") }}
+{{ with .Params.featureimage }}
+  {{ $imgType := partial "functions/get-image-type.html" . }}
+  {{ if eq $imgType "local" }}
+    {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "global-assets" "size" $size ) }}
   {{ else }}
-    {{ $featured = resources.Get $url }}
+    {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" $imgType "size" $size ) }}
   {{ end }}
 {{ end }}
 
-{{ if not $featured }}
-  {{ $images := $.Resources.ByType "image" }}
+{{ if not $imgSrc }}
   {{ range slice "*background*" "*feature*" "*cover*" "*thumbnail*" }}
-    {{ if not $featured }}{{ $featured = $images.GetMatch . }}{{ end }}
+    {{ if not $imgSrc }}
+      {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "page-bundle" "size" $size ) }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
-{{ if not $featured }}
-  {{ with .Site.Params.defaultBackgroundImage }}
-    {{ if or (strings.HasPrefix . "http:") (strings.HasPrefix . "https:") }}
-      {{ $featured = resources.GetRemote . }}
+{{ if not $imgSrc }}
+  {{ with site.Params.defaultFeaturedImage }}
+    {{ $imgType := partial "functions/get-image-type.html" . }}
+    {{ if eq $imgType "local" }}
+      {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" "global-assets" "size" $size ) }}
     {{ else }}
-      {{ $featured = resources.Get . }}
+      {{ $imgSrc = partial "functions/get-image-src.html" (dict "ctx" $.Page "imgPath" . "type" $imgType "size" $size ) }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -35,49 +36,13 @@
 {{- $alt := .Page.Title -}}
 {{- with .Page.Params.alt }}{{ $alt = . }}{{ end -}}
 
-{{- with $featured -}}
-  {{ if strings.HasSuffix $featured ".svg" }}
-    {{ with . }}
-      <figure>
-        <img class="w-full rounded-lg single_hero_round nozoom" alt="{{ $alt }}" src="{{ .RelPermalink }}">
-        {{ if $caption }}
-          <figcaption class="text-sm text-neutral-700 dark:text-neutral-400 hover:underline text-center">
-            {{ $caption | markdownify }}
-          </figcaption>
-        {{ end }}
-      </figure>
+{{- with $imgSrc -}}
+  <figure>
+    <img class="w-full rounded-lg single_hero_round nozoom" alt="{{ $alt }}" src="{{ . }}">
+    {{ if $caption }}
+      <figcaption class="text-sm text-neutral-700 dark:text-neutral-400 hover:underline text-center">
+        {{ $caption | markdownify }}
+      </figcaption>
     {{ end }}
-  {{ else if $disableImageOptimization }}
-    {{ with . }}
-      <figure>
-        <img
-          class="w-full rounded-lg single_hero_round nozoom"
-          alt="{{ $alt }}"
-          width="{{ .Width }}"
-          height="{{ .Height }}"
-          src="{{ .RelPermalink }}">
-        {{ if $caption }}
-          <figcaption class="text-sm text-neutral-700 dark:text-neutral-400 hover:underline text-center">
-            {{ $caption | markdownify }}
-          </figcaption>
-        {{ end }}
-      </figure>
-    {{ end }}
-  {{ else }}
-    {{ with .Resize (print ($.Site.Params.backgroundImageWidth | default "1200") "x") }}
-      <figure>
-        <img
-          class="w-full rounded-lg single_hero_round nozoom"
-          alt="{{ $alt }}"
-          width="{{ .Width }}"
-          height="{{ .Height }}"
-          src="{{ .RelPermalink }}">
-        {{ if $caption }}
-          <figcaption class="text-sm text-neutral-700 dark:text-neutral-400 hover:underline text-center">
-            {{ $caption | markdownify }}
-          </figcaption>
-        {{ end }}
-      </figure>
-    {{ end }}
-  {{ end }}
+  </figure>
 {{- end -}}
