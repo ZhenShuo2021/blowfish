@@ -92,10 +92,6 @@
       "to": "assets/lib/typeit/typeit.umd.js"
     },
     {
-      "from": "node_modules/jquery/dist/jquery.slim.min.js",
-      "to": "assets/lib/jquery/jquery.slim.min.js"
-    },
-    {
       "from": "node_modules/packery/dist/packery.pkgd.min.js",
       "to": "assets/lib/packery/packery.pkgd.min.js"
     },
