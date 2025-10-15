@@ -1,5 +1,5 @@
 ---
-title: "Multiple Authors"
+title: "400x2000 Multiple Authors"
 date: 2022-10-12
 draft: false
 description: "Sample for a multiple author setup"
@@ -10,6 +10,7 @@ authors:
   - "nunocoracao"
   - "secondauthor"
 type: 'sample'
+featureimage: img/15-400x2000.jpg
 ---
 
 This is an example of how an article with multiple authors will look like. 

@@ -1,11 +1,12 @@
 ---
-title: "Welcome to Blowfish"
+title: "400x2000 Welcome to Blowfish"
 weight: 1
 draft: false
 description: "Discover what's new in Blowfish version 2.0."
 tags: ["new", "docs"]
 series: ["Documentation"]
 series_order: 1
+featureimage: img/15-400x2000.jpg
 ---
 
 {{< lead >}}

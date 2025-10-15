@@ -1,5 +1,5 @@
 ---
-title: "Shortcodes"
+title: "1600x900 Shortcodes"
 weight: 6
 draft: false
 description: "All the shortcodes available in Blowfish."

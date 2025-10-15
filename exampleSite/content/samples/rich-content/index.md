@@ -1,10 +1,11 @@
 ---
-title: "Rich Content"
+title: "1200x600 Rich Content"
 date: 2019-03-10
 description: "A brief description of Hugo Shortcodes"
 summary: "This is an _example_ of a **rich** content summary."
 tags: ["shortcodes", "privacy", "sample", "gist", "twitter", "youtube", "vimeo"]
 type: 'sample'
+featureimage: img/61-1200x600.jpg
 ---
 
 Hugo ships with several [built-in shortcodes](https://gohugo.io/content-management/shortcodes/#embedded) for rich content, along with a [privacy config](https://gohugo.io/about/hugo-and-gdpr/) and a set of _simple shortcodes_ that enable static and no-JS versions of various social media embeds.

@@ -1,5 +1,5 @@
 ---
-title: "Icons"
+title: "800x800 Icons"
 date: 2020-08-14
 lastmod: 2022-03-09
 draft: false
@@ -7,6 +7,7 @@ description: "Icon support in Blowfish."
 slug: "icons"
 tags: ["icons", "sample", "shortcodes"]
 type: 'sample'
+featureimage: img/60-800x800.jpg
 ---
 
 Blowfish has built-in support for a number of [FontAwesome 6](https://fontawesome.com/icons) icons. These can be included in your website through either the [icon partial]({{< ref "docs/partials#icon" >}}) or [icon shortcode]({{< ref "docs/shortcodes#icon" >}}).

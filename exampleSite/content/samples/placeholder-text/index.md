@@ -1,5 +1,5 @@
 ---
-title: "Placeholder Text"
+title: "1600x900 Placeholder Text"
 date: "2019-03-09"
 lastmod: "2022-01-24"
 draft: false
@@ -8,6 +8,7 @@ tags: ["markdown", "text", "sample", "latin"]
 showDateUpdated: true
 xml: false
 type: 'sample'
+featureimage: img/20-1600x900.jpg
 ---
 
 Lorem est tota propiore conpellat pectoribus de pectora summo. <!--more-->Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.

@@ -1,5 +1,5 @@
 ---
-title: "Installation"
+title: "2000x400 Installation"
 weight: 2
 draft: false
 description: "How to install the Blowfish theme."
@@ -7,6 +7,7 @@ slug: "installation"
 tags: ["installation", "docs"]
 series: ["Documentation"]
 series_order: 2
+featureimage: img/15-2000x400.jpg
 ---
 
 Simply follow the standard Hugo [Quick Start](https://gohugo.io/getting-started/quick-start/) procedure to get up and running quickly.

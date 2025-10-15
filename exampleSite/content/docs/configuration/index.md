@@ -1,5 +1,5 @@
 ---
-title: "Configuration"
+title: "600x1200 Configuration"
 weight: 4
 draft: false
 description: "All the configuration variables available in Blowfish."
@@ -7,6 +7,7 @@ slug: "configuration"
 tags: ["config", "docs"]
 series: ["Documentation"]
 series_order: 4
+featureimage: img/61-600x1200.jpg
 ---
 
 Blowfish is a highly customisable theme and uses some of the latest Hugo features to simplify how it is configured.
