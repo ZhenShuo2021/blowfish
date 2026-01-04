@@ -19,6 +19,7 @@ replyByEmail = false
 
 # mainSections = ["section1", "section2"]
 # robots = ""
+compactSummary = true
 
 disableImageOptimization = false
 disableImageOptimizationMD = false

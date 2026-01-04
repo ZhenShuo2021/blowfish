@@ -18,6 +18,7 @@ replyByEmail = false
 
 mainSections = ["docs"]
 # robots = ""
+compactSummary = true
 
 disableImageOptimization = false
 disableImageOptimizationMD = false

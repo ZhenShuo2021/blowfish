@@ -95,7 +95,7 @@
       {{ partial "article-meta/basic.html" . }}
     </div>
     {{ if .Params.showSummary | default (.Site.Params.list.showSummary | default false) }}
-      <div class="prose dark:prose-invert py-1">{{ .Summary | plainify }}</div>
+      <div class="prose dark:prose-invert py-1  {{ if site.Params.compactSummary }}line-clamp-5{{ end }}">{{ .Summary | plainify }}</div>
     {{ end }}
   </div>
   <div class="px-6 pt-4 pb-2"></div>
