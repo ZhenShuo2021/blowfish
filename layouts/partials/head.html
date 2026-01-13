@@ -1,4 +1,8 @@
 <head>
+  {{ $logo := resources.Get .Site.Params.Logo }}
+  {{ if $logo }}
+    <link rel="preload" as="image" href="{{ $logo.RelPermalink }}">
+  {{ end }}
   <meta charset="utf-8">
   {{ with .Site.Language.Params.htmlCode | default .Site.LanguageCode }}
     <meta http-equiv="content-language" content="{{ . }}">
