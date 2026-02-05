@@ -154,7 +154,12 @@
   {{ end }}
 {{ end }}
 
+{{/* Firebase */}}
 {{ if site.Params.firebase.apiKey }}
+  {{ $firebase := resources.Get "js/firebase.js" }}
+  {{ $firebase = $firebase | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script type="module" src="{{ $firebase.RelPermalink }}" integrity="{{ $firebase.Data.Integrity }}"></script>
+
   {{ if in (slice "page" "section") .Kind }}
     {{ $translations := .AllTranslations }}
     {{ with .File }}
@@ -169,48 +174,26 @@
   {{ else if eq .Kind "taxonomy" }}
     {{ partial "inline/firebase-config.html" (dict "views" (printf "views_taxonomy_%s" .Data.Plural) "likes" (printf "likes_taxonomy_%s" .Data.Plural)) }}
   {{ else if eq .Kind "home" }}
-    {{ partial "inline/firebase-config.html" (dict "views" (printf "views_home") "likes" (printf "likes_home")) }}
+    {{ partial "inline/firebase-config.html" (dict "views" "views_home" "likes" "likes_home") }}
   {{ end }}
 
-
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: {{ site.Params.firebase.apiKey }},
-      authDomain: {{ site.Params.firebase.authDomain }},
-      projectId: {{ site.Params.firebase.projectId }},
-      storageBucket: {{ site.Params.firebase.storageBucket }},
-      messagingSenderId: {{ site.Params.firebase.messagingSenderId }},
-      appId: {{ site.Params.firebase.appId }},
-      measurementId: {{ site.Params.firebase.measurementId }}
-    };
-    var app = firebase.initializeApp(firebaseConfig);
-    var db = firebase.firestore();
-    var auth = firebase.auth();
-  </script> {{/*  */}}
-  {{ $firebase := resources.Get "js/firebase.js" }}
-  {{ $firebase = $firebase | resources.Minify | resources.Fingerprint (site.Params.fingerprintAlgorithm | default "sha512") }}
-  <script
-    type="text/javascript"
-    src="{{ $firebase.RelPermalink }}"
-    integrity="{{ $firebase.Data.Integrity }}"></script>
 {{ end }}
 
-{{ define "partials/inline/firebase-config.html" }}
-  <script id="firebase-config" type="application/json">
-    {
-      "config": {
-        "apiKey": "{{ site.Params.firebase.apiKey }}",
-        "authDomain": "{{ site.Params.firebase.authDomain }}",
-        "projectId": "{{ site.Params.firebase.projectId }}",
-        "storageBucket": "{{ site.Params.firebase.storageBucket }}",
-        "messagingSenderId": "{{ site.Params.firebase.messagingSenderId }}",
-        "appId": "{{ site.Params.firebase.appId }}",
-        "measurementId": "{{ site.Params.firebase.measurementId }}"
-      },
-      "oids": {{ . | jsonify | safeJS }}
+{{ define "_partials/inline/firebase-config.html" }}
+<script id="firebase-config" 
+        type="application/json"
+        data-views="{{ .views }}"
+        data-likes="{{ .likes }}">
+  {
+    "config": {
+      "apiKey": "{{ site.Params.firebase.apiKey }}",
+      "authDomain": "{{ site.Params.firebase.authDomain }}",
+      "projectId": "{{ site.Params.firebase.projectId }}",
+      "storageBucket": "{{ site.Params.firebase.storageBucket }}",
+      "messagingSenderId": "{{ site.Params.firebase.messagingSenderId }}",
+      "appId": "{{ site.Params.firebase.appId }}",
+      "measurementId": "{{ site.Params.firebase.measurementId }}"
     }
-  </script>
+  }
+</script>
 {{ end }}
