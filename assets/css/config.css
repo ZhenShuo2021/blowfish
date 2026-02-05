@@ -214,7 +214,7 @@
   }
 
   & code:not(pre code) {
-    background-color: rgb(24 24 27 / 0.7);
+    background-color: theme("colors.zinc.900 / 0.7");
   }
 
   & hr {

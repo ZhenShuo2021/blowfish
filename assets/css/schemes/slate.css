@@ -2,36 +2,36 @@
 :root {
   --color-neutral: 255, 255, 255;
   /* Gray */
-  --color-neutral-50: 249, 250, 251;
-  --color-neutral-100: 243, 244, 246;
-  --color-neutral-200: 229, 231, 235;
-  --color-neutral-300: 209, 213, 219;
-  --color-neutral-400: 156, 163, 175;
-  --color-neutral-500: 107, 114, 128;
-  --color-neutral-600: 75, 85, 99;
-  --color-neutral-700: 55, 65, 81;
-  --color-neutral-800: 31, 41, 55;
-  --color-neutral-900: 17, 24, 39;
+  --clr-neutral-50: rgb(249, 250, 251);
+  --clr-neutral-100: rgb(243, 244, 246);
+  --clr-neutral-200: rgb(229, 231, 235);
+  --clr-neutral-300: rgb(209, 213, 219);
+  --clr-neutral-400: rgb(156, 163, 175);
+  --clr-neutral-500: rgb(107, 114, 128);
+  --clr-neutral-600: rgb(75, 85, 99);
+  --clr-neutral-700: rgb(55, 65, 81);
+  --clr-neutral-800: rgb(31, 41, 55);
+  --clr-neutral-900: rgb(17, 24, 39);
   /* Slate */
-  --color-primary-50: 248, 250, 252;
-  --color-primary-100: 241, 245, 249;
-  --color-primary-200: 226, 232, 240;
-  --color-primary-300: 203, 213, 225;
-  --color-primary-400: 148, 163, 184;
-  --color-primary-500: 100, 116, 139;
-  --color-primary-600: 71, 85, 105;
-  --color-primary-700: 51, 65, 85;
-  --color-primary-800: 30, 41, 59;
-  --color-primary-900: 15, 23, 42;
+  --clr-primary-50: rgb(248, 250, 252);
+  --clr-primary-100: rgb(241, 245, 249);
+  --clr-primary-200: rgb(226, 232, 240);
+  --clr-primary-300: rgb(203, 213, 225);
+  --clr-primary-400: rgb(148, 163, 184);
+  --clr-primary-500: rgb(100, 116, 139);
+  --clr-primary-600: rgb(71, 85, 105);
+  --clr-primary-700: rgb(51, 65, 85);
+  --clr-primary-800: rgb(30, 41, 59);
+  --clr-primary-900: rgb(15, 23, 42);
   /* Gray */
-  --color-secondary-50: 249, 250, 251;
-  --color-secondary-100: 243, 244, 246;
-  --color-secondary-200: 229, 231, 235;
-  --color-secondary-300: 209, 213, 219;
-  --color-secondary-400: 156, 163, 175;
-  --color-secondary-500: 107, 114, 128;
-  --color-secondary-600: 75, 85, 99;
-  --color-secondary-700: 55, 65, 81;
-  --color-secondary-800: 31, 41, 55;
-  --color-secondary-900: 17, 24, 39;
+  --clr-secondary-50: rgb(249, 250, 251);
+  --clr-secondary-100: rgb(243, 244, 246);
+  --clr-secondary-200: rgb(229, 231, 235);
+  --clr-secondary-300: rgb(209, 213, 219);
+  --clr-secondary-400: rgb(156, 163, 175);
+  --clr-secondary-500: rgb(107, 114, 128);
+  --clr-secondary-600: rgb(75, 85, 99);
+  --clr-secondary-700: rgb(55, 65, 81);
+  --clr-secondary-800: rgb(31, 41, 55);
+  --clr-secondary-900: rgb(17, 24, 39);
 }
