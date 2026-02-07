@@ -1,17 +1,18 @@
 /* Blowfish scheme */
 :root {
   --clr-neutral: rgb(255, 255, 255);
-  /* Gray */
-  --clr-neutral-50: rgb(248, 250, 252);
-  --clr-neutral-100: rgb(241, 245, 249);
-  --clr-neutral-200: rgb(226, 232, 240);
-  --clr-neutral-300: rgb(203, 213, 225);
-  --clr-neutral-400: rgb(148, 163, 184);
-  --clr-neutral-500: rgb(100, 116, 139);
-  --clr-neutral-600: rgb(71, 85, 105);
-  --clr-neutral-700: rgb(51, 65, 85);
-  --clr-neutral-800: rgb(30, 41, 59);
-  --clr-neutral-900: rgb(15, 23, 42);
+  /* neutral */
+  --clr-neutral-50: oklch(0.985 0.002 247.839);
+  --clr-neutral-100: oklch(0.967 0.003 264.542);
+  --clr-neutral-200: oklch(0.928 0.006 264.531);
+  --clr-neutral-300: oklch(0.872 0.01 258.338);
+  --clr-neutral-400: oklch(0.707 0.022 261.325);
+  --clr-neutral-500: oklch(0.551 0.027 264.364);
+  --clr-neutral-600: oklch(0.446 0.03 256.802);
+  --clr-neutral-700: oklch(0.373 0.034 259.733);
+  --clr-neutral-800: oklch(0.278 0.033 256.848);
+  --clr-neutral-900: oklch(0.21 0.034 264.665);
+  --clr-neutral-950: oklch(0.13 0.028 261.692);
   /* primary */
   --clr-primary-50: oklch(0.97 0.014 254.604);
   --clr-primary-100: oklch(0.932 0.032 255.585);

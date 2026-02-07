@@ -101,8 +101,8 @@
   {{ $schemeName := .Site.Params.colorScheme | default "blowfish" }}
   {{ $cssScheme := resources.Get (printf "css/schemes/%s.css" (lower $schemeName)) | default (resources.Get "css/schemes/blowfish.css") }}
   {{ $cssResources = $cssResources | append $cssScheme }}
-  {{ if not site.Params.tw }}
-    {{ with resources.Get "css/main.css" }}
+  {{ if site.Params.tw }}
+    {{ with resources.Get "css/tailwind/main.css" }}
       {{ $opts := dict "minify" (not hugo.IsDevelopment) }}
       {{ with . | css.TailwindCSS $opts }}
         {{ if hugo.IsDevelopment }}
@@ -119,7 +119,7 @@
       {{ end }}
     {{ end }}
   {{ else }}
-    {{ $cssResources = $cssResources | append (resources.Get "css/compiled/main.css") }}
+    {{ $cssResources = $cssResources | append (resources.Get "css/tailwind/compiled.css") }}
   {{ end }}
   {{ with resources.Get "css/custom.css" }}
     {{ $cssResources = $cssResources | append . }}
