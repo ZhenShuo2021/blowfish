@@ -4318,16 +4318,16 @@
     transform: translateX(18px);
   }
   .ios-toggle input:checked + .toggle-track {
-    background: var(--color-primary-500);
+    background: var(--clr-primary-500);
   }
   .ios-toggle input:checked ~ .ios-toggle-ball {
     transform: translateX(18px);
   }
   .ios-toggle.is-checked {
-    background: var(--color-primary-500);
+    background: var(--clr-primary-500);
   }
   .ios-toggle:has(input:checked) {
-    background: var(--color-primary-500);
+    background: var(--clr-primary-500);
   }
   .ios-toggle:has(input:checked)::after {
     transform: translateX(18px);
