@@ -4809,7 +4809,7 @@ pre {
       --scrollbar-thumb: var(--clr-neutral-600);
     }
     &:where(.dark, .dark *) {
-      --scrollbar-track: var(--clr-neutral-800);
+      --scrollbar-track: var(--clr-neutral-900);
     }
   }
 }
