@@ -133,15 +133,16 @@
 
   & a {
     text-decoration: none;
-    text-decoration-color: var(--clr-primary-300);
     font-weight: 500;
+
+    &.active {
+      text-decoration-line: underline;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 4px;
+    }
 
     & code {
       color: var(--tw-prose-code);
-    }
-
-    &.active {
-      text-decoration-color: var(--clr-primary-600);
     }
   }
 
@@ -196,7 +197,9 @@
     font-weight: 500;
 
     &.active {
-      text-decoration-color: var(--clr-primary-400);
+      text-decoration-line: underline;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 4px;
     }
   }
 
