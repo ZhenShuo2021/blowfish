@@ -1,6 +1,6 @@
 /* Fire scheme */
 :root {
-  --color-neutral: 255, 255, 255;
+  --clr-neutral: 255, 255, 255;
   /* Stone */
   --clr-neutral-50: rgb(250, 250, 249);
   --clr-neutral-100: rgb(245, 245, 244);
@@ -12,26 +12,29 @@
   --clr-neutral-700: rgb(68, 64, 60);
   --clr-neutral-800: rgb(41, 37, 36);
   --clr-neutral-900: rgb(28, 25, 23);
-  /* Orange */
-  --clr-primary-50: rgb(255, 247, 237);
-  --clr-primary-100: rgb(255, 237, 213);
-  --clr-primary-200: rgb(254, 215, 170);
-  --clr-primary-300: rgb(253, 186, 116);
-  --clr-primary-400: rgb(251, 146, 60);
-  --clr-primary-500: rgb(249, 115, 22);
-  --clr-primary-600: rgb(234, 88, 12);
-  --clr-primary-700: rgb(194, 65, 12);
-  --clr-primary-800: rgb(154, 52, 18);
-  --clr-primary-900: rgb(124, 45, 18);
-  /* Rose */
-  --clr-secondary-50: rgb(255, 241, 242);
-  --clr-secondary-100: rgb(255, 228, 230);
-  --clr-secondary-200: rgb(254, 205, 211);
-  --clr-secondary-300: rgb(253, 164, 175);
-  --clr-secondary-400: rgb(251, 113, 133);
-  --clr-secondary-500: rgb(244, 63, 94);
-  --clr-secondary-600: rgb(225, 29, 72);
-  --clr-secondary-700: rgb(190, 18, 60);
-  --clr-secondary-800: rgb(159, 18, 57);
-  --clr-secondary-900: rgb(136, 19, 55);
+  /* primary */
+  --clr-primary-50: oklch(0.98 0.016 73.684);
+  --clr-primary-100: oklch(0.954 0.038 75.164);
+  --clr-primary-200: oklch(0.901 0.076 70.697);
+  --clr-primary-300: oklch(0.837 0.128 66.29);
+  --clr-primary-400: oklch(0.75 0.183 55.934);
+  --clr-primary-500: oklch(0.705 0.213 47.604);
+  --clr-primary-600: oklch(0.646 0.222 41.116);
+  --clr-primary-700: oklch(0.553 0.195 38.402);
+  --clr-primary-800: oklch(0.47 0.157 37.304);
+  --clr-primary-900: oklch(0.408 0.123 38.172);
+  --clr-primary-950: oklch(0.266 0.079 36.259);
+
+  /* secondary */
+  --clr-secondary-50: oklch(0.969 0.015 12.422);
+  --clr-secondary-100: oklch(0.941 0.03 12.58);
+  --clr-secondary-200: oklch(0.892 0.058 10.001);
+  --clr-secondary-300: oklch(0.81 0.117 11.638);
+  --clr-secondary-400: oklch(0.712 0.194 13.428);
+  --clr-secondary-500: oklch(0.645 0.246 16.439);
+  --clr-secondary-600: oklch(0.586 0.253 17.585);
+  --clr-secondary-700: oklch(0.514 0.222 16.935);
+  --clr-secondary-800: oklch(0.455 0.188 13.697);
+  --clr-secondary-900: oklch(0.41 0.159 10.272);
+  --clr-secondary-950: oklch(0.271 0.105 12.094);
 }

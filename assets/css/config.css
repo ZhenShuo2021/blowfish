@@ -94,12 +94,6 @@
     text-decoration-color: var(--color-primary-300);
     font-weight: 500;
 
-    &:hover {
-      color: var(--color-primary-600);
-      text-decoration: none;
-      border-radius: 0.09rem;
-    }
-
     & code {
       color: var(--tw-prose-code);
     }
@@ -193,11 +187,9 @@
   --tw-prose-td-borders: var(--color-neutral-700);
 
   & a {
-    text-decoration-color: var(--color-neutral-600);
-
-    &:hover {
-      color: var(--color-primary-400);
-    }
+    text-decoration: none;
+    color: var(--color-primary-400);
+    font-weight: 500;
 
     &.active {
       text-decoration-color: var(--color-primary-400);

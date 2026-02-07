@@ -69,7 +69,6 @@
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --color-neutral: var(--clr-neutral);
-    --color-primary-50: var(--clr-primary-50);
     --color-primary-100: var(--clr-primary-100);
     --color-primary-200: var(--clr-primary-200);
     --color-primary-300: var(--clr-primary-300);
@@ -79,16 +78,11 @@
     --color-primary-700: var(--clr-primary-700);
     --color-primary-800: var(--clr-primary-800);
     --color-primary-900: var(--clr-primary-900);
-    --color-secondary-50: var(--clr-secondary-50);
-    --color-secondary-100: var(--clr-secondary-100);
-    --color-secondary-200: var(--clr-secondary-200);
-    --color-secondary-300: var(--clr-secondary-300);
     --color-secondary-400: var(--clr-secondary-400);
     --color-secondary-500: var(--clr-secondary-500);
     --color-secondary-600: var(--clr-secondary-600);
     --color-secondary-700: var(--clr-secondary-700);
     --color-secondary-800: var(--clr-secondary-800);
-    --color-secondary-900: var(--clr-secondary-900);
   }
 }
 @layer base {
@@ -1060,11 +1054,6 @@
       text-decoration: none;
       text-decoration-color: var(--color-primary-300);
       font-weight: 500;
-      &:hover {
-        color: var(--color-primary-600);
-        text-decoration: none;
-        border-radius: 0.09rem;
-      }
       & code {
         color: var(--tw-prose-code);
       }
@@ -1740,10 +1729,9 @@
     --tw-prose-th-borders: var(--color-neutral-500);
     --tw-prose-td-borders: var(--color-neutral-700);
     & a {
-      text-decoration-color: var(--color-neutral-600);
-      &:hover {
-        color: var(--color-primary-400);
-      }
+      text-decoration: none;
+      color: var(--color-primary-400);
+      font-weight: 500;
       &.active {
         text-decoration-color: var(--color-primary-400);
       }
@@ -3190,11 +3178,6 @@
       max-width: none;
     }
   }
-  .lg\:flex-grow {
-    @media (width >= 64rem) {
-      flex-grow: 1;
-    }
-  }
   .lg\:grid-flow-col-dense {
     @media (width >= 64rem) {
       grid-auto-flow: column dense;
@@ -3208,11 +3191,6 @@
   .lg\:flex-row {
     @media (width >= 64rem) {
       flex-direction: row;
-    }
-  }
-  .lg\:flex-wrap {
-    @media (width >= 64rem) {
-      flex-wrap: wrap;
     }
   }
   .lg\:gap-24 {
@@ -3371,10 +3349,9 @@
       --tw-prose-th-borders: var(--color-neutral-500);
       --tw-prose-td-borders: var(--color-neutral-700);
       & a {
-        text-decoration-color: var(--color-neutral-600);
-        &:hover {
-          color: var(--color-primary-400);
-        }
+        text-decoration: none;
+        color: var(--color-primary-400);
+        font-weight: 500;
         &.active {
           text-decoration-color: var(--color-primary-400);
         }
