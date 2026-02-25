@@ -40,13 +40,26 @@ var updateMermaidTheme = () => {
       }
     });
 
-    if (isDark) {
-      initMermaidDark();
-      mermaid.run();
-    } else {
-      initMermaidLight();
-      mermaid.run();
-    }
+    const initTheme = isDark ? initMermaidDark : initMermaidLight;
+    initTheme();
+    
+    mermaid.run().then(() => {
+      if (typeof SvgToolbelt !== 'undefined') {
+        setTimeout(() => {
+          const mermaids = document.querySelectorAll('.mermaid');
+          mermaids.forEach(element => {
+          if (element.getBoundingClientRect().height >= 100) {
+            new SvgToolbelt.SvgToolbelt(element, {
+              minScale: 0.2,
+              maxScale: 10,
+              controlsPosition: 'top-right',
+              zoomStep: 0.2
+            }).init();
+          }
+          });
+        }, 100);
+      }
+    });
   }
 }
 
