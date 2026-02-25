@@ -9,6 +9,21 @@
     type="text/javascript"
     src="{{ $mermaidJS.RelPermalink }}"
     integrity="{{ $mermaidJS.Data.Integrity }}"></script>
+
+  {{ $svgZoomJS := resources.Get "lib/svg-toolbelt/svg-toolbelt.cjs.production.min.js" }}
+  {{ $svgZoomJS := $svgZoomJS | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script
+    defer
+    type="text/javascript"
+    src="{{ $svgZoomJS.RelPermalink }}"
+    integrity="{{ $svgZoomJS.Data.Integrity }}"></script>
+  {{ $svgZoomCSS := resources.Get "lib/svg-toolbelt/svg-toolbelt.css" }}
+  {{ $svgZoomCSS := $svgZoomCSS | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="{{ $svgZoomCSS.RelPermalink }}"
+    integrity="{{ $svgZoomCSS.Data.Integrity }}">
 {{ end }}
 
 {{/* Chart */}}
