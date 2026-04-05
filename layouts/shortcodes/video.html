@@ -187,19 +187,21 @@
 {{- $caption := .Get "caption" -}}
 
 <figure>
-  <video
-    class="w-full rounded-md {{ $ratioClass }} {{ $fitClass }}"
-    {{- with $ratioStyle }} style="{{ . }}"{{ end -}}
-    preload="{{ $preload }}"
-    {{- if $poster }} poster="{{ $poster }}"{{ end -}}
-    {{- if $autoplay }} autoplay{{ end -}}
-    {{- if $loop }} loop{{ end -}}
-    {{- if $muted }} muted{{ end -}}
-    {{- if $controls }} controls{{ end -}}
-    {{- if $playsinline }} playsinline{{ end -}}
-  >
-    <source src="{{ $srcWithTime }}">
-    <p>Your browser cannot play this video. <a href="{{ $src }}">Download video</a>.</p>
-  </video>
+  <div class="relative">
+    <video
+      class="w-full rounded-md {{ $ratioClass }} {{ $fitClass }}"
+      {{- with $ratioStyle }} style="{{ . }}"{{ end -}}
+      preload="{{ $preload }}"
+      {{- if $poster }} poster="{{ $poster }}"{{ end -}}
+      {{- if $autoplay }} autoplay{{ end -}}
+      {{- if $loop }} loop{{ end -}}
+      {{- if $muted }} muted{{ end -}}
+      {{- if $controls }} controls{{ end -}}
+      {{- if $playsinline }} playsinline{{ end -}}
+    >
+      <source src="{{ $srcWithTime }}">
+      <p>Your browser cannot play this video. <a href="{{ $src }}">Download video</a>.</p>
+    </video>
+  </div>
   {{- with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
 </figure>
